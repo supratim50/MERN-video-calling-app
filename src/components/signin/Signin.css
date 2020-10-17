@@ -10,17 +10,22 @@
   border-radius: 14px;
 }
 .logo {
-  font-size: 36px;
+  font-size: 32px;
   color: rgba(255, 255, 255, 0.7);
 }
 .heading {
-  max-width: 326px;
+  max-width: 320px;
   line-height: 56px;
   letter-spacing: 1px;
 }
 
 .login__box {
   max-width: 350px !important;
+}
+@media screen and (min-width: 1500px) {
+  .login__box {
+    max-width: 450px !important;
+  }
 }
 .username__input {
   border-radius: 8px;
@@ -35,6 +40,9 @@
   border-radius: 8px;
   border: 0;
   background-color: #39b1ff;
-  font-size: 18px;
   color: #fff;
+  transition: 0.5s;
+}
+.join__btn:hover {
+  background-color: #2293df;
 }

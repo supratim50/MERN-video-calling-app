@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
+// context
+import { useDataLayerValue } from "../../DataLayer";
 
-const Home = ({ userName, imageUrl }) => {
+// components
+import Navbar from "../navbar/Navbar";
+
+const Home = (props) => {
+  const [{ userName, imageUrl }, dispatch] = useDataLayerValue();
+  const [profileImage, setProfileImage] = useState();
+  const [googleSignin, setGoogleSignin] = useState(false);
+
+  useEffect(() => {
+    // fetching from the local storage
+    let profile = localStorage.getItem("userProfile");
+    profile = JSON.parse(profile);
+    // set into the state
+    setProfileImage(profile.profile_img);
+    setGoogleSignin(profile.googleSignin);
+  }, [userName, imageUrl]);
+
+  // connect to the server
   const ENDPOINT = "http://localhost:4000";
 
   // connect with our backend
@@ -11,7 +30,7 @@ const Home = ({ userName, imageUrl }) => {
 
   return (
     <div>
-      <h1>This is home page</h1>
+      <Navbar profileImg={profileImage} googleSignin={googleSignin} />
     </div>
   );
 };

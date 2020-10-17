@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {BrowserRouter as Router, Route} from "react-router-dom"
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -6,20 +7,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Signup from "./components/signin/Signin";
 import Home from "./components/Home/Home";
 
-// context
-import { useDataLayerValue } from "./DataLayer";
 
 function App() {
-  const [{ userName, imageUrl }, dispatch] = useDataLayerValue();
 
   return (
-    <div className="app">
-      {userName && imageUrl ? (
-        <Home userName={userName} imageUrl={imageUrl} />
-      ) : (
-        <Signup />
-      )}
-    </div>
+    // <div className="app">
+    //   {userName && imageUrl ? (
+    //     <Home userName={userName} imageUrl={imageUrl} />
+    //   ) : (
+    //     <Signup />
+    //   )}
+    // </div>
+    <Router>
+      <Route path="/home" component={Home} />
+      <Route exact path="/" component={Signup} />
+    </Router>
   );
 }
 
