@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
-import { useDataLayerValue } from "../../DataLayer";
 import { Link, useHistory } from "react-router-dom";
 // svg
 import LoginSvg from "../../images/loginSvg.svg";
@@ -9,8 +8,6 @@ import "./Signin.css";
 
 const Signin = () => {
   const history = useHistory();
-
-  const [state, dispatch] = useDataLayerValue();
   const [userName, setUserName] = useState("");
 
   //   google auth
@@ -22,16 +19,10 @@ const Signin = () => {
       googleSignin: true,
     };
     localStorage.setItem("userProfile", JSON.stringify(userProfile));
-    // add to reducer
-    dispatch({
-      type: "SET_GOOGLE_DATA",
-      name: profileObj.name,
-      imageUrl: profileObj.imageUrl,
-    });
     history.push("/home");
   };
 
-  useEffect(() => {
+  const join = (e) => {
     if (userName != "") {
       // storing profile to local storage
       let userProfile = {
@@ -39,14 +30,10 @@ const Signin = () => {
         googleSignin: false,
       };
       localStorage.setItem("userProfile", JSON.stringify(userProfile));
-      dispatch({
-        type: "SET_GUEST_DATA",
-        name: userName,
-      });
+    } else {
+      e.preventDefault();
     }
-
-    console.log(state);
-  }, [userName]);
+  };
 
   return (
     <div className="container-fluid py-3" style={{ height: "100vh" }}>
@@ -76,10 +63,7 @@ const Signin = () => {
                 onChange={(e) => setUserName(e.target.value)}
               />
               {/* redirect to home page */}
-              <Link
-                onClick={(e) => (!userName ? e.preventDefault() : null)}
-                to="/home"
-              >
+              <Link onClick={(e) => join(e)} to="/home">
                 <button
                   className="join__btn paragraph__text w-100 py-3 font-weight-bold"
                   type="submit"

@@ -1,0 +1,5 @@
+.sidebar {
+  min-width: 400px;
+  flex: 0.3;
+  border-radius: 8px;
+}

@@ -1,6 +1,7 @@
 export const initialState = {
   userName: null,
   imageUrl: null,
+  isGoogleSignin: false,
 };
 
 const reducer = (state, action) => {
@@ -11,11 +12,13 @@ const reducer = (state, action) => {
         ...state,
         userName: action.name,
         imageUrl: action.imageUrl,
+        isGoogleSignin: action.isGoogleSignin,
       };
     case "SET_GUEST_DATA":
       return {
         ...state,
         userName: action.name,
+        isGoogleSignin: action.isGoogleSignin,
       };
     default:
       return state;

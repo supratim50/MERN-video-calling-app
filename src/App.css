@@ -1,12 +1,32 @@
+/* typography */
 .paragraph__text {
   font-size: 16px !important;
 }
 .primary__heading {
   font-size: 28px !important;
 }
+
+/* text color */
 .color_secondary {
   color: #10486c !important;
 }
 .color_primary {
   color: #39b1ff !important;
+}
+.color_primary_one {
+  color: #000e42 !important;
+}
+.color_white {
+  color: #fff !important;
+}
+
+/* background color */
+.bg_color_orange {
+  background-color: #fc682d !important;
+}
+.bg_color_primary {
+  background-color: #39b1ff !important;
+}
+.bg_color_light_grey {
+  background-color: #f4f4f4 !important;
 }

@@ -1,0 +1,9 @@
+.button_primary {
+  min-height: 55px;
+  color: #000;
+  cursor: pointer;
+}
+
+.button_primary:hover {
+  color: #39b1ff !important;
+}

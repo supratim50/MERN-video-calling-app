@@ -1,0 +1,14 @@
+.home__content {
+  margin-top: 170px;
+}
+.welcome__text {
+  max-width: 421px !important;
+}
+.image__box {
+  max-width: 481px !important;
+}
+.svg_box {
+  position: fixed;
+  top: -55%;
+  left: -36%;
+}
