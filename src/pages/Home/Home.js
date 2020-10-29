@@ -33,7 +33,7 @@ const Home = () => {
         <img className="image-fluid" src={require("../../images/circle.svg")} />
       </div>
       {/* home content */}
-      <Navbar />
+      <Navbar classList="mt-3" />
       <div className="container home__content">
         <div className="row">
           {/* col no 1 */}

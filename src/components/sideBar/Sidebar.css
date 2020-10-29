@@ -1,5 +1,24 @@
-.sidebar {
+.side__bar {
   min-width: 400px;
   flex: 0.3;
   border-radius: 8px;
+  transition: 0.5s;
+  display: none;
 }
+.show {
+  display: block;
+  /* animation: show 0.5s ease-in-out; */
+}
+
+/* @keyframes show {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(70%);
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+} */

@@ -4,10 +4,12 @@ import "./Sidebar.css";
 // components
 import PrimaryButton from "../buttons/primaryButton/PrimaryButton";
 
-const Sidebar = () => {
+const Sidebar = ({ show }) => {
   return (
     <div
-      className={`border border-danger h-100 side__bar p-3 sidebar ml-2 bg_color_light_grey`}
+      className={`side__bar border border-danger h-100 p-3 ml-2 bg_color_light_grey ${
+        show ? "show" : ""
+      }`}
     >
       <div className="d-flex justify-content-between">
         <PrimaryButton text="Chat" />

@@ -1,3 +1,10 @@
 .meeting__page {
   height: 100vh;
 }
+.meeting__box {
+  transition: 0.5s;
+}
+.vedio__box {
+  width: 50%;
+  height: 50%;
+}
