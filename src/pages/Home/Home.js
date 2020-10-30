@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import io from "socket.io-client";
 import "./Home.css";
 // icons
@@ -13,9 +14,16 @@ import SquareButton from "../../components/buttons/SquareButton/SquareButton";
 const Home = () => {
   const [{ userName, imageUrl }, dispatch] = useDataLayerValue();
 
+  const history = useHistory();
+
   useEffect(() => {
     // add data into reducer
-    getUser(dispatch);
+    try {
+      getUser(dispatch);
+    } catch {
+      // go back to login page if user not login
+      history.push("/");
+    }
 
     // connect to the server
     const ENDPOINT = "http://localhost:4000";

@@ -11,9 +11,13 @@ import Sidebar from "../../components/sideBar/Sidebar";
 
 const Meeting = () => {
   const [show, setShow] = useState(false);
+  // will work
+  const [openChat, setOpenChat] = useState(false);
+  const [openParticipants, setOpenParticipants] = useState(false);
 
   const showSidebar = () => {
     setShow(!show);
+    console.log(show);
   };
 
   const [{ userName, imageUrl }, dispatch] = useDataLayerValue();

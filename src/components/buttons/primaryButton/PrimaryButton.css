@@ -2,8 +2,11 @@
   min-height: 55px;
   color: #000;
   cursor: pointer;
+  border: 1px solid #fff !important;
+  border-radius: 8px;
+  transition: 0.3s;
 }
 
 .button_primary:hover {
-  color: #39b1ff !important;
+  box-shadow: 0 0 8px #39b0ff94 !important;
 }
