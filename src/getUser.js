@@ -18,4 +18,6 @@ export const getUser = (dispatch) => {
       isGoogleSignin: profile.googleSignin,
     });
   }
+
+  return { name: profile.name, imageUrl: profile.profile_img };
 };

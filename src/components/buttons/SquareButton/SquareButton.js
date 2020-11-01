@@ -1,9 +1,12 @@
 import React from "react";
 import "./SquareButton.css";
 
-const SquareButton = ({ icon, classList, text }) => {
+const SquareButton = ({ icon, classList, text, onClick }) => {
   return (
-    <div className="square__button d-flex flex-column align-items-center">
+    <div
+      className="square__button d-flex flex-column align-items-center"
+      onClick={onClick}
+    >
       <div
         className={`button color_white p-4 d-flex justify-content-center align-items-center ${
           classList ? classList : ""

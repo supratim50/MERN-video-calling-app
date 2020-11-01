@@ -8,3 +8,7 @@
   width: 50%;
   height: 50%;
 }
+.video {
+  width: 100% !important;
+  height: auto;
+}

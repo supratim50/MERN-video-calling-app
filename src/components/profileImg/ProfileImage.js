@@ -29,7 +29,7 @@ const ProfileImage = () => {
       </div>
       <div className="drop__down shadow-sm position-absolute rounded-lg">
         <div
-          className="drop__down-list paragraph__text-lg font-weight-bold text-capitalize"
+          className="drop__down-list paragraph__text font-weight-bold text-capitalize"
           onClick={logoutFunc}
         >
           logout

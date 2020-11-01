@@ -1,0 +1,24 @@
+.create_room__modal-background {
+  width: 100% !important;
+  height: 100% !important;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+
+  transition: 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-100px);
+}
+.create_room__modal {
+  width: 100%;
+  max-width: 400px;
+}
+
+.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}

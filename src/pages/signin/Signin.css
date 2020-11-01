@@ -36,13 +36,3 @@
 .username__input:focus {
   outline: none;
 }
-.join__btn {
-  border-radius: 8px;
-  border: 0;
-  background-color: #39b1ff;
-  color: #fff;
-  transition: 0.5s;
-}
-.join__btn:hover {
-  background-color: #2293df;
-}

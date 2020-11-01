@@ -5,6 +5,8 @@ import { Link, useHistory } from "react-router-dom";
 import LoginSvg from "../../images/loginSvg.svg";
 // css
 import "./Signin.css";
+// components
+import PrimaryButton from "../../components/buttons/primaryButton/PrimaryButton";
 
 const Signin = () => {
   const history = useHistory();
@@ -63,13 +65,12 @@ const Signin = () => {
                 onChange={(e) => setUserName(e.target.value)}
               />
               {/* redirect to home page */}
-              <Link onClick={(e) => join(e)} to="/home">
-                <button
-                  className="join__btn paragraph__text w-100 py-3 font-weight-bold"
-                  type="submit"
-                >
-                  Join
-                </button>
+              <Link
+                className="text-decoration-none"
+                onClick={(e) => join(e)}
+                to="/home"
+              >
+                <PrimaryButton text="Join" bgBlue />
               </Link>
             </div>
             <p className="text-muted text-center mb-4 paragraph__text">or</p>

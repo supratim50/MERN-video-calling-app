@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import io from "socket.io-client";
 import "./Home.css";
 // icons
 import { FaVideo, FaPlusCircle } from "react-icons/fa";
@@ -10,11 +9,18 @@ import { getUser } from "../../getUser";
 // components
 import Navbar from "../../components/navbar/Navbar";
 import SquareButton from "../../components/buttons/SquareButton/SquareButton";
+import CreateRoom from "../../components/modal/CreateRoom";
 
 const Home = () => {
   const [{ userName, imageUrl }, dispatch] = useDataLayerValue();
-
   const history = useHistory();
+
+  // state
+  const [showCreateRoom, setShowCreateRoom] = useState(false);
+
+  const showCreateRoomFunc = () => {
+    setShowCreateRoom(!showCreateRoom);
+  };
 
   useEffect(() => {
     // add data into reducer
@@ -24,14 +30,6 @@ const Home = () => {
       // go back to login page if user not login
       history.push("/");
     }
-
-    // connect to the server
-    const ENDPOINT = "http://localhost:4000";
-
-    // connect with our backend
-    const socket = io.connect(ENDPOINT);
-
-    socket.emit("newUserJoin", { userName, imageUrl });
   }, [userName, imageUrl]);
 
   return (
@@ -60,6 +58,7 @@ const Home = () => {
                   icon={<FaVideo />}
                   classList="bg_color_orange"
                   text="New Meeting"
+                  onClick={showCreateRoomFunc}
                 />
                 <SquareButton
                   icon={<FaPlusCircle />}
@@ -80,6 +79,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* create room meatting */}
+      {showCreateRoom ? <CreateRoom show /> : <CreateRoom />}
     </div>
   );
 };
