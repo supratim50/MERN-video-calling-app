@@ -15,21 +15,12 @@ const Home = () => {
   const [{ userName, imageUrl }, dispatch] = useDataLayerValue();
   const history = useHistory();
 
-  // state
-  const [showCreateRoom, setShowCreateRoom] = useState(false);
-
-  const showCreateRoomFunc = () => {
-    setShowCreateRoom(!showCreateRoom);
-  };
-
   useEffect(() => {
     // add data into reducer
-    try {
-      getUser(dispatch);
-    } catch {
+    getUser(dispatch, () => {
       // go back to login page if user not login
       history.push("/");
-    }
+    });
   }, [userName, imageUrl]);
 
   return (
@@ -56,13 +47,13 @@ const Home = () => {
               <div className="d-flex mt-5 pt-5">
                 <SquareButton
                   icon={<FaVideo />}
-                  classList="bg_color_orange"
+                  classList="orange"
                   text="New Meeting"
-                  onClick={showCreateRoomFunc}
+                  clickable
                 />
                 <SquareButton
                   icon={<FaPlusCircle />}
-                  classList="bg_color_primary"
+                  classList="blue"
                   text="Join"
                 />
               </div>
@@ -79,9 +70,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-      {/* create room meatting */}
-      {showCreateRoom ? <CreateRoom show /> : <CreateRoom />}
     </div>
   );
 };

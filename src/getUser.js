@@ -1,6 +1,9 @@
-export const getUser = (dispatch) => {
+export const getUser = (dispatch, callback) => {
   // fetching from the local storage
   let profile = localStorage.getItem("userProfile");
+  if (profile === null) {
+    return callback();
+  }
   profile = JSON.parse(profile);
 
   // add to reducer

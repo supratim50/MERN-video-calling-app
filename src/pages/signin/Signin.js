@@ -37,6 +37,12 @@ const Signin = () => {
     }
   };
 
+  // Redirect users to the home page if they are loged in
+  useEffect(() => {
+    const profile = localStorage.getItem("userProfile");
+    if (profile !== null) history.push("/home");
+  });
+
   return (
     <div className="container-fluid py-3" style={{ height: "100vh" }}>
       <div className="row mx-auto h-100">

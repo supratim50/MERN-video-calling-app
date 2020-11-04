@@ -5,19 +5,29 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 9999;
+
+  transition: 0.5s;
+  opacity: 0;
+  visibility: hidden;
+}
+.create_room__modal {
+  width: 100%;
+  max-width: 400px;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
   z-index: 99999;
 
   transition: 0.5s;
   opacity: 0;
   visibility: hidden;
-  transform: translateX(-100px);
-}
-.create_room__modal {
-  width: 100%;
-  max-width: 400px;
+  animation: modal-box 1s ease-in-out;
 }
 
-.show {
+.showModal {
   opacity: 1;
   visibility: visible;
   transform: translateX(0);
