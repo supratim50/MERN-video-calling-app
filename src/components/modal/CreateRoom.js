@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { v4 } from "uuid";
 import "./CreateRoom.css";
 
 // components
@@ -8,9 +9,6 @@ import PrimaryButton from "../buttons/primaryButton/PrimaryButton";
 
 const CreateRoom = ({ show, onclick }) => {
   const [room, setRoom] = useState("");
-  useEffect(() => {
-    console.log(room);
-  }, [room]);
 
   return (
     <>
@@ -29,7 +27,14 @@ const CreateRoom = ({ show, onclick }) => {
           Create Your Own Room
         </p>
         <Input classList="mb-4" placeholder="Room Name" setroom={setRoom} />
-        <Link>
+        <Link
+          onClick={(e) => {
+            if (!room) {
+              e.preventDefault();
+            }
+          }}
+          to={`/meeting?room=${room}&roomId=${v4()}`}
+        >
           <PrimaryButton bgBlue text="Create" />
         </Link>
       </div>

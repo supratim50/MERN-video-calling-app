@@ -54,7 +54,11 @@ const Signin = () => {
               One cLick to go digital
             </h1>
             <div className="w-100 mt-auto">
-              <img className="w-100" src={LoginSvg} alt="Login Svg" />
+              <img
+                className="w-100"
+                src={require("../../images/loginSvg.svg")}
+                alt="Login Svg"
+              />
             </div>
           </div>
         </div>

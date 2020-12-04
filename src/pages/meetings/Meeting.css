@@ -10,5 +10,5 @@
 }
 .video {
   width: 100% !important;
-  height: auto;
+  max-height: 100% !important;
 }
