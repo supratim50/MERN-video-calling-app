@@ -22,6 +22,9 @@
 .color_white {
   color: #fff !important;
 }
+.color_black {
+  color: #000 !important;
+}
 
 /* background color */
 .bg_color_orange {
@@ -32,4 +35,20 @@
 }
 .bg_color_light_grey {
   background-color: #f4f4f4 !important;
+}
+.bg_color_white {
+  background-color: #fff !important;
+}
+.bg_color_red {
+  background-color: #ff4141 !important;
+}
+.bg_color_green {
+  background-color: #39ff88 !important;
+}
+
+/* ============================ others ========================= */
+.meeting__box:hover > .bottom__button__box {
+  bottom: 0;
+  opacity: 1;
+  visibility: visible;
 }

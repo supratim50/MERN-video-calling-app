@@ -11,6 +11,7 @@ import "./Meeting.css";
 // components
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sideBar/Sidebar";
+import ControlBox from "../../components/controlBox/controlBox";
 
 const videoConstraints = {
   height: "100%",
@@ -154,7 +155,7 @@ const Meeting = ({ location }) => {
     <div className="meeting__page d-flex flex-column">
       <Navbar />
       <div className="container-fluid border pt-4 pb-3 mt-5 flex-fill d-flex overflow-hidden">
-        <div className="meeting__box border border-danger h-100 flex-wrap flex-fill d-flex justify-content-center align-items-center">
+        <div className="meeting__box overflow-hidden border border-danger h-100 flex-wrap flex-fill d-flex justify-content-center align-items-center position-relative">
           <div className="vedio__box p-1 d-flex justify-content-center">
             <video ref={userVideo} autoPlay muted />
           </div>
@@ -166,7 +167,10 @@ const Meeting = ({ location }) => {
               <Video peer={peer} />
             </div>
           ))}
+          {/* control box */}
+          <ControlBox />
         </div>
+        {/* side bar */}
         {show ? <Sidebar show /> : <Sidebar />}
       </div>
 
