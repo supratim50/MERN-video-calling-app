@@ -2,6 +2,8 @@ export const initialState = {
   userName: null,
   imageUrl: null,
   isGoogleSignin: false,
+  showChatBox: false,
+  showParticipants: false,
 };
 
 const reducer = (state, action) => {
@@ -19,6 +21,18 @@ const reducer = (state, action) => {
         ...state,
         userName: action.name,
         isGoogleSignin: action.isGoogleSignin,
+      };
+    case "OPEN_CHAT":
+      return {
+        ...state,
+        showChatBox: action.chat,
+        showParticipants: false,
+      };
+    case "OPEN_PARTICIPANTS":
+      return {
+        ...state,
+        showParticipants: action.participants,
+        showChatBox: false,
       };
     default:
       return state;

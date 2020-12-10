@@ -1,9 +1,10 @@
 import React from "react";
 import "./button.css";
 
-const Button = ({ icon, classList }) => {
+const Button = ({ icon, classList, onClick }) => {
   return (
     <div
+      onClick={onClick}
       className={`button p-3 d-flex align-items-center rounded-circle ${
         classList ? classList : ""
       }`}

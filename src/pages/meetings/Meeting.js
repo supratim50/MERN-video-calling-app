@@ -28,7 +28,7 @@ const Video = ({ peer }) => {
     });
   }, []);
 
-  return <video ref={ref} autoPlay />;
+  return <video className="video" ref={ref} autoPlay />;
 };
 
 // --------------------------------- Parent Component ---------------------------------------
@@ -41,11 +41,6 @@ const Meeting = ({ location }) => {
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
-
-  // for show side bars
-  const showSidebar = () => {
-    setShow(!show);
-  };
 
   useEffect(() => {
     // get the user data
@@ -157,7 +152,7 @@ const Meeting = ({ location }) => {
       <div className="container-fluid border pt-4 pb-3 mt-5 flex-fill d-flex overflow-hidden">
         <div className="meeting__box overflow-hidden border border-danger h-100 flex-wrap flex-fill d-flex justify-content-center align-items-center position-relative">
           <div className="vedio__box p-1 d-flex justify-content-center">
-            <video ref={userVideo} autoPlay muted />
+            <video className="video" ref={userVideo} autoPlay muted />
           </div>
           {peers.map((peer, index) => (
             <div
@@ -171,10 +166,8 @@ const Meeting = ({ location }) => {
           <ControlBox />
         </div>
         {/* side bar */}
-        {show ? <Sidebar show /> : <Sidebar />}
+        <Sidebar />
       </div>
-
-      <button onClick={showSidebar}>Click Here</button>
     </div>
   );
 };

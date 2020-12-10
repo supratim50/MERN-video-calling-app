@@ -1,29 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Sidebar.css";
 
 // components
 import PrimaryButton from "../buttons/primaryButton/PrimaryButton";
+import { useDataLayerValue } from "../../DataLayer";
 
-const Sidebar = ({ show }) => {
+const Sidebar = () => {
+  const [{ showChatBox, showParticipants }, dispatch] = useDataLayerValue();
+
   const [openChat, setOpenChat] = useState(false);
   const [openParticipants, setOpenParticipants] = useState(false);
 
   // open chat box function
   const openChatFunc = () => {
-    setOpenChat(!openChat);
-    setOpenParticipants(false);
+    // set the reducer
+    setOpenChat(showChatBox);
   };
 
   // open participants box function
   const openParticipantsFunc = () => {
-    setOpenParticipants(!openParticipants);
-    setOpenChat(false);
+    // set the reducer
+    setOpenParticipants(showParticipants);
   };
+
+  // chat useEffect
+  useEffect(() => {
+    openChatFunc();
+  }, [showChatBox]);
+  // participants useEffect
+  useEffect(() => {
+    openParticipantsFunc();
+  }, [showParticipants]);
 
   return (
     <div
       className={`side__bar h-100 p-3 ml-2 bg_color_light_grey flex-column ${
-        show ? "show" : ""
+        openChat || openParticipants ? "show" : ""
       }`}
     >
       {/* ==================== buttons ======================== */}
