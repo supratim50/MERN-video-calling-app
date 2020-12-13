@@ -4,6 +4,7 @@ export const initialState = {
   isGoogleSignin: false,
   showChatBox: false,
   showParticipants: false,
+  allUsers: [],
 };
 
 const reducer = (state, action) => {
@@ -33,6 +34,12 @@ const reducer = (state, action) => {
         ...state,
         showParticipants: action.participants,
         showChatBox: false,
+      };
+    case "ADD_ALL_USERS":
+      console.log(action.users);
+      return {
+        ...state,
+        allUsers: action.users,
       };
     default:
       return state;

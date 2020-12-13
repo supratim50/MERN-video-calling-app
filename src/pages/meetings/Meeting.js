@@ -5,7 +5,7 @@ import Peer from "simple-peer";
 import "./Meeting.css";
 
 // context
-// import { useDataLayerValue } from "../../DataLayer";
+import { useDataLayerValue } from "../../DataLayer";
 // import { getUser } from "../../getUser";
 
 // components
@@ -33,8 +33,7 @@ const Video = ({ peer }) => {
 
 // --------------------------------- Parent Component ---------------------------------------
 const Meeting = ({ location }) => {
-  // show sidebar
-  const [show, setShow] = useState(false);
+  const [state, dispatch] = useDataLayerValue();
   // peers
   const [peers, setPeers] = useState([]);
   // use refs
@@ -53,7 +52,6 @@ const Meeting = ({ location }) => {
     const roomID = query.roomId;
     // connect with server
     socketRef.current = io.connect("/");
-    console.log(socketRef.current);
     // get the user media
     navigator.mediaDevices
       .getUserMedia({ video: videoConstraints, audio: true })
@@ -66,9 +64,15 @@ const Meeting = ({ location }) => {
           imageUrl,
         });
         socketRef.current.on("all users", (userInThisRoom) => {
+          // add all users to the reducer
+          dispatch({
+            type: "ADD_ALL_USERS",
+            users: userInThisRoom,
+          });
           const peers = [];
           // send the signal to all users in this room
           userInThisRoom.forEach((user) => {
+            // create New Peer
             const peer = createNewPeer(
               user.userId,
               socketRef.current.id,

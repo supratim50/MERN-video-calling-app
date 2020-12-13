@@ -3,34 +3,40 @@ import "./Sidebar.css";
 
 // components
 import PrimaryButton from "../buttons/primaryButton/PrimaryButton";
+import ProfileList from "../Lists/ProfileList/profileList";
 import { useDataLayerValue } from "../../DataLayer";
 
 const Sidebar = () => {
-  const [{ showChatBox, showParticipants }, dispatch] = useDataLayerValue();
+  const [state, dispatch] = useDataLayerValue();
 
   const [openChat, setOpenChat] = useState(false);
   const [openParticipants, setOpenParticipants] = useState(false);
+  const [usersInRoom, setUsersinRoom] = useState([]);
 
   // open chat box function
   const openChatFunc = () => {
     // set the reducer
-    setOpenChat(showChatBox);
+    setOpenChat(state.showChatBox);
   };
 
   // open participants box function
   const openParticipantsFunc = () => {
     // set the reducer
-    setOpenParticipants(showParticipants);
+    setOpenParticipants(state.showParticipants);
   };
 
-  // chat useEffect
+  // =============== chat useEffect
   useEffect(() => {
     openChatFunc();
-  }, [showChatBox]);
-  // participants useEffect
+  }, [state.showChatBox]);
+  // =============== participants useEffect
   useEffect(() => {
     openParticipantsFunc();
-  }, [showParticipants]);
+  }, [state.showParticipants]);
+  // =============== fetching participants
+  useEffect(() => {
+    setUsersinRoom(state.allUsers);
+  }, [state.allUsers]);
 
   return (
     <div
@@ -80,9 +86,12 @@ const Sidebar = () => {
 
       {/* ======================== participants ======================= */}
       {openParticipants ? (
-        <div className="flex-fill d-flex flex-column mt-3 border border-danger">
-          <div className="flex-fill border border-success">
-            <h3>This is Participants Box</h3>
+        <div className="flex-fill d-flex flex-column mt-3">
+          <div className="flex-fill">
+            {usersInRoom.map((user, index) => {
+              console.log(user);
+              return <ProfileList key={index} userDetails={user} />;
+            })}
           </div>
         </div>
       ) : (
