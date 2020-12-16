@@ -40,6 +40,7 @@ const Meeting = ({ location }) => {
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
+  const roomIdRef = useRef();
 
   useEffect(() => {
     // get the user data
@@ -49,7 +50,7 @@ const Meeting = ({ location }) => {
     // get the room data
     const query = queryString.parse(location.search);
     const roomName = query.room;
-    const roomID = query.roomId;
+    roomIdRef.current = query.roomId;
     // connect with server
     socketRef.current = io.connect("/");
     // get the user media
@@ -58,12 +59,13 @@ const Meeting = ({ location }) => {
       .then((stream) => {
         userVideo.current.srcObject = stream;
         socketRef.current.emit("join user", {
-          roomID,
+          roomID: roomIdRef.current,
           roomName,
           name,
           imageUrl,
         });
         socketRef.current.on("all users", (userInThisRoom) => {
+          console.log(userInThisRoom);
           // add all users to the reducer
           dispatch({
             type: "ADD_ALL_USERS",
@@ -89,8 +91,13 @@ const Meeting = ({ location }) => {
           setPeers(peers);
         });
         // =========== new user join =======
-        socketRef.current.on("user join", (callerId, signal) => {
-          console.log("new user joined !!", callerId);
+        socketRef.current.on("user join", (callerId, signal, callerData) => {
+          console.log("new user joined !!", callerId, callerData);
+          // add the callerdata to the reducer
+          dispatch({
+            type: "ADD_ALL_USERS",
+            users: [callerData],
+          });
           const peer = addPeer(callerId, signal, stream);
           // push the peer
           peersRef.current.push({
@@ -126,6 +133,7 @@ const Meeting = ({ location }) => {
         userToSignal,
         callerId,
         signal,
+        roomID: roomIdRef.current,
       });
     });
 
