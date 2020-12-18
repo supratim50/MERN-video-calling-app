@@ -1,0 +1,17 @@
+.chat-box {
+  max-width: 75%;
+  font-size: 16px;
+  display: inline-block;
+}
+
+.left-chat {
+  background-color: #b7e2ff;
+  border-radius: 5px 20px 20px 20px;
+  align-self: flex-start;
+}
+
+.right-chat {
+  background-color: #fff;
+  border-radius: 20px 5px 20px 20px;
+  align-self: flex-end;
+}
