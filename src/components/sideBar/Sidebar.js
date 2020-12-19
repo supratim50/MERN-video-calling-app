@@ -5,8 +5,7 @@ import "./Sidebar.css";
 import PrimaryButton from "../buttons/primaryButton/PrimaryButton";
 import ProfileList from "../Lists/ProfileList/profileList";
 import { useDataLayerValue } from "../../DataLayer";
-import Chat from "../Lists/chatList/chatList";
-import ChatInput from "../input/chatInput/ChatInput";
+import ChatBox from "../chat/ChatBox";
 
 const Sidebar = () => {
   const [state, dispatch] = useDataLayerValue();
@@ -71,19 +70,7 @@ const Sidebar = () => {
       </div>
 
       {/* ================= chats ========================== */}
-      {openChat ? (
-        <div className="flex-fill d-flex flex-column mt-3">
-          <div className="flex-fill d-flex flex-column">
-            <Chat classList="right-chat" text=" hey how are you ?" />
-            <Chat classList="left-chat" text="I'm fine" />
-          </div>
-          <div className="pt-3">
-            <ChatInput />
-          </div>
-        </div>
-      ) : (
-        ""
-      )}
+      {openChat ? <ChatBox /> : ""}
 
       {/* ======================== participants ======================= */}
       {openParticipants ? (
