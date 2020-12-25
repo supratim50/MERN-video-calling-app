@@ -4,7 +4,7 @@ import "./Sidebar.css";
 // components
 import PrimaryButton from "../buttons/primaryButton/PrimaryButton";
 import ProfileList from "../Lists/ProfileList/profileList";
-import { useDataLayerValue } from "../../DataLayer";
+import { useDataLayerValue } from "../../contexts/DataLayer";
 import ChatBox from "../chat/ChatBox";
 
 const Sidebar = () => {

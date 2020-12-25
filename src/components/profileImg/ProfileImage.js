@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { useDataLayerValue } from "../../DataLayer";
+import { useDataLayerValue } from "../../contexts/DataLayer";
 
 // css
 import "./ProfileImage.css";

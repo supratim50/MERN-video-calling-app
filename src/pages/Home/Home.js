@@ -4,7 +4,7 @@ import "./Home.css";
 // icons
 import { FaVideo, FaPlusCircle } from "react-icons/fa";
 // context
-import { useDataLayerValue } from "../../DataLayer";
+import { useDataLayerValue } from "../../contexts/DataLayer";
 import { getUser } from "../../getUser";
 // components
 import Navbar from "../../components/navbar/Navbar";

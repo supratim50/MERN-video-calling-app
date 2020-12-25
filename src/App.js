@@ -8,20 +8,25 @@ import Signup from "./pages/signin/Signin";
 import Home from "./pages/Home/Home";
 import Meeting from "./pages/meetings/Meeting";
 
+// context
+import { DataLayer } from "./contexts/DataLayer";
+import SocketContext from "./contexts/SocketContext";
+import reducer, { initialState } from "./reducer";
+import MessageContext from "./contexts/messageContext";
+
 function App() {
   return (
-    // <div className="app">
-    //   {userName && imageUrl ? (
-    //     <Home userName={userName} imageUrl={imageUrl} />
-    //   ) : (
-    //     <Signup />
-    //   )}
-    // </div>
-    <Router>
-      <Route path="/home" component={Home} />
-      <Route path="/meeting" component={Meeting} />
-      <Route exact path="/" component={Signup} />
-    </Router>
+    <SocketContext>
+      <DataLayer initialState={initialState} reducer={reducer}>
+        <MessageContext>
+          <Router>
+            <Route path="/home" component={Home} />
+            <Route path="/meeting" component={Meeting} />
+            <Route exact path="/" component={Signup} />
+          </Router>
+        </MessageContext>
+      </DataLayer>
+    </SocketContext>
   );
 }
 

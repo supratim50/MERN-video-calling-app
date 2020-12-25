@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import io from "socket.io-client";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import queryString from "query-string";
 import Peer from "simple-peer";
 import "./Meeting.css";
 
 // context
-import { useDataLayerValue } from "../../DataLayer";
-// import { getUser } from "../../getUser";
+import { useDataLayerValue } from "../../contexts/DataLayer";
+import { SocketIoContext } from "../../contexts/SocketContext";
 
 // components
 import Navbar from "../../components/navbar/Navbar";
@@ -33,7 +32,9 @@ const Video = ({ peer }) => {
 
 // --------------------------------- Parent Component ---------------------------------------
 const Meeting = ({ location }) => {
+  // contexts
   const [state, dispatch] = useDataLayerValue();
+  const { socket } = useContext(SocketIoContext);
   // peers
   const [peers, setPeers] = useState([]);
   // use refs
@@ -52,7 +53,7 @@ const Meeting = ({ location }) => {
     const roomName = query.room;
     roomIdRef.current = query.roomId;
     // connect with server
-    socketRef.current = io.connect("/");
+    socketRef.current = socket;
     // get the user media
     navigator.mediaDevices
       .getUserMedia({ video: videoConstraints, audio: true })
