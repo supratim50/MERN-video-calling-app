@@ -86,7 +86,10 @@ const Meeting = ({ location }) => {
               peerId: user.userId,
               peer, // peer : peer
             });
-            peers.push(peer);
+            peers.push({
+              peerId: user.userId,
+              peer,
+            });
           });
           // set all the peers into to state
           setPeers(peers);
@@ -105,17 +108,35 @@ const Meeting = ({ location }) => {
             peerId: callerId,
             peer,
           });
+          const peerObj = {
+            peerId: callerId,
+            peer,
+          };
           // set the state without changing others value
-          setPeers((peers) => [...peers, peer]);
+          setPeers((peers) => [...peers, peerObj]);
         });
 
         // ============= recieving signal =============
         socketRef.current.on("recieving returning signal", ({ signal, id }) => {
-          console.log("id", id);
           const item = peersRef.current.find((peer) => peer.peerId === id);
-          console.log("yes it's matched!", item);
           // peering caller signal
           item.peer.signal(signal);
+        });
+
+        console.log("peers", peers);
+
+        // =============== user left ==================
+        socketRef.current.on("user left", (id) => {
+          // getting the peerObj from ref
+          const peerObj = peersRef.current.find((peer) => peer.peerId === id);
+          // destroy the peer
+          if (peerObj) {
+            peerObj.peer.destroy();
+          }
+          // set the peer
+          const peers = peersRef.current.filter((peer) => peer.peerId !== id);
+          peersRef.current = peers;
+          setPeers(peers);
         });
       });
   }, []);
@@ -167,12 +188,12 @@ const Meeting = ({ location }) => {
           <div className="vedio__box p-1 d-flex justify-content-center">
             <video className="video" ref={userVideo} autoPlay muted />
           </div>
-          {peers.map((peer, index) => (
+          {peers.map((peer) => (
             <div
-              key={index}
+              key={peer.peerId}
               className="vedio__box p-1 d-flex justify-content-center"
             >
-              <Video peer={peer} />
+              <Video peer={peer.peer} />
             </div>
           ))}
           {/* control box */}
