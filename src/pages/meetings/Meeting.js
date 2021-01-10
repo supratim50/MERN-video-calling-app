@@ -46,6 +46,7 @@ const Meeting = ({ location }) => {
   const userVideo = useRef();
   const peersRef = useRef([]);
   const roomIdRef = useRef();
+  const myVideoStream = useRef();
 
   useEffect(() => {
     // get the user data
@@ -62,7 +63,11 @@ const Meeting = ({ location }) => {
     navigator.mediaDevices
       .getUserMedia({ video: videoConstraints, audio: true })
       .then((stream) => {
+        // set my video src
         userVideo.current.srcObject = stream;
+        // getting my video access
+        myVideoStream.current = stream;
+        // interact with server
         socketRef.current.emit("join user", {
           roomID: roomIdRef.current,
           roomName,
@@ -148,21 +153,6 @@ const Meeting = ({ location }) => {
       });
   }, []);
 
-  // mute
-  const muteAudio = () => {
-    console.log(userVideo.current);
-    // const audio = userVideo.current.getAudioTracks()[0].enabled;
-    // if (audio) {
-    //   setMuted(true);
-    //   userVideo.current.getAudioTracks()[0].enabled = false;
-    // } else {
-    //   setMuted(false);
-    //   userVideo.current.getAudioTracks()[0].enabled = true;
-    // }
-  };
-
-  // show video
-
   // ==================== craete new peer ===============
   function createNewPeer(userToSignal, callerId, stream) {
     console.log("hey hey");
@@ -201,6 +191,32 @@ const Meeting = ({ location }) => {
     return peer;
   }
 
+  // mute
+  const muteAudio = () => {
+    let audio = myVideoStream.current.getAudioTracks()[0].enabled;
+    if (audio) {
+      setMuted(true);
+      myVideoStream.current.getAudioTracks()[0].enabled = false;
+    } else {
+      setMuted(false);
+      myVideoStream.current.getAudioTracks()[0].enabled = true;
+    }
+    console.log(muted);
+  };
+
+  // show video
+  const showVideoFunc = () => {
+    let video = myVideoStream.current.getVideoTracks()[0].enabled;
+    if (video) {
+      setShowVideo(false);
+      myVideoStream.current.getVideoTracks()[0].enabled = false;
+    } else {
+      setShowVideo(true);
+      myVideoStream.current.getVideoTracks()[0].enabled = true;
+    }
+    console.log(showVideo);
+  };
+
   // =================== render here ==========================
   return (
     <div className="meeting__page d-flex flex-column">
@@ -222,6 +238,7 @@ const Meeting = ({ location }) => {
           {/* needs to improve */}
           <ControlBox
             muteAudio={muteAudio}
+            showVideoFunc={showVideoFunc}
             audioVideo={{ muted, showVideo }}
           />{" "}
           {/* needs to improve */}

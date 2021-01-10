@@ -16,9 +16,11 @@ import {
   FaShareSquare,
   FaRocketchat,
   FaUsers,
+  FaMicrophoneSlash,
+  FaVideoSlash,
 } from "react-icons/fa";
 
-const ControlBox = ({ muteAudio, audioVideo }) => {
+const ControlBox = ({ muteAudio, showVideoFunc, audioVideo }) => {
   // props
   const { muted, showVideo } = audioVideo;
 
@@ -54,11 +56,12 @@ const ControlBox = ({ muteAudio, audioVideo }) => {
     <div className="bottom__button__box position-absolute w-100 d-flex justify-content-between align-items-center">
       {/* left box */}
       <div className="bottom_button_box__left_box d-flex align-items-center justify-content-between p-3">
+        {/* check user muted or not */}
         {muted ? (
           <Button
             onClick={muteAudio}
-            classList="mr-3 bg_color_white"
-            icon={<FaVideo size={30} />}
+            classList="mr-3 bg_color_red"
+            icon={<FaMicrophoneSlash size={30} />}
           />
         ) : (
           <Button
@@ -67,7 +70,20 @@ const ControlBox = ({ muteAudio, audioVideo }) => {
             icon={<FaMicrophone size={30} />}
           />
         )}
-        <Button classList="mr-3 bg_color_white" icon={<FaVideo size={30} />} />
+        {/* check user showing video or not */}
+        {showVideo ? (
+          <Button
+            onClick={showVideoFunc}
+            classList="mr-3 bg_color_white"
+            icon={<FaVideo size={30} />}
+          />
+        ) : (
+          <Button
+            onClick={showVideoFunc}
+            classList="mr-3 bg_color_red"
+            icon={<FaVideoSlash size={30} />}
+          />
+        )}
       </div>
       {/* middle box */}
       <div className="bottom_button_box__middle_box flex-fill d-flex justify-content-center align-items-center">
