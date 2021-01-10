@@ -14,11 +14,12 @@ const Button = ({ icon, classList, onClick }) => {
   );
 };
 
-export const CornerRoundButton = ({ classList, content }) => {
+export const CornerRoundButton = ({ classList, content, onClick }) => {
   return (
     <div
+      onClick={onClick && onClick}
       style={{ fontSize: 25, letterSpacing: 3, borderRadius: 10 }}
-      className={`font-weight-bold d-flex align-items-center justify-content-center ${
+      className={`cornerButton font-weight-bold d-flex align-items-center justify-content-center ${
         classList ? classList : ""
       }`}
     >

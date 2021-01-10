@@ -32,6 +32,10 @@ const Video = ({ peer }) => {
 
 // --------------------------------- Parent Component ---------------------------------------
 const Meeting = ({ location }) => {
+  // state
+  const [muted, setMuted] = useState(false);
+  const [showVideo, setShowVideo] = useState(true);
+
   // contexts
   const [state, dispatch] = useDataLayerValue();
   const { socket } = useContext(SocketIoContext);
@@ -133,13 +137,31 @@ const Meeting = ({ location }) => {
           if (peerObj) {
             peerObj.peer.destroy();
           }
+          console.log("before", peers);
           // set the peer
-          const peers = peersRef.current.filter((peer) => peer.peerId !== id);
-          peersRef.current = peers;
-          setPeers(peers);
+          const peer = peersRef.current.filter((peer) => peer.peerId !== id);
+          peersRef.current = peer;
+          setPeers(peer);
+
+          console.log("after", peers);
         });
       });
   }, []);
+
+  // mute
+  const muteAudio = () => {
+    console.log(userVideo.current);
+    // const audio = userVideo.current.getAudioTracks()[0].enabled;
+    // if (audio) {
+    //   setMuted(true);
+    //   userVideo.current.getAudioTracks()[0].enabled = false;
+    // } else {
+    //   setMuted(false);
+    //   userVideo.current.getAudioTracks()[0].enabled = true;
+    // }
+  };
+
+  // show video
 
   // ==================== craete new peer ===============
   function createNewPeer(userToSignal, callerId, stream) {
@@ -197,7 +219,12 @@ const Meeting = ({ location }) => {
             </div>
           ))}
           {/* control box */}
-          <ControlBox />
+          {/* needs to improve */}
+          <ControlBox
+            muteAudio={muteAudio}
+            audioVideo={{ muted, showVideo }}
+          />{" "}
+          {/* needs to improve */}
         </div>
         {/* side bar */}
         <Sidebar />
