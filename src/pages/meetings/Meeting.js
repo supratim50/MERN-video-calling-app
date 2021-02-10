@@ -121,6 +121,7 @@ const Meeting = ({ location }) => {
             peerId: callerId,
             peer,
           };
+          console.log("peerObj", peerObj, peers);
           // set the state without changing others value
           setPeers((peers) => [...peers, peerObj]);
         });
@@ -152,6 +153,8 @@ const Meeting = ({ location }) => {
         });
       });
   }, []);
+
+  console.log("Peers", peers);
 
   // ==================== craete new peer ===============
   function createNewPeer(userToSignal, callerId, stream) {

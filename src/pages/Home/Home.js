@@ -9,7 +9,6 @@ import { getUser } from "../../getUser";
 // components
 import Navbar from "../../components/navbar/Navbar";
 import SquareButton from "../../components/buttons/SquareButton/SquareButton";
-import CreateRoom from "../../components/modal/CreateRoom";
 
 const Home = () => {
   const [{ userName, imageUrl }, dispatch] = useDataLayerValue();

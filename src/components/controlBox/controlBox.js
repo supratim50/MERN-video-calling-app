@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./controlBox.css";
 
 // components
 import Button, { CornerRoundButton } from "../buttons/Buttons/button";
 import { useDataLayerValue } from "../../contexts/DataLayer";
+import CreateRoom from "../modal/CreateModal";
 
 //context
 import { SocketIoContext } from "../../contexts/SocketContext";
@@ -29,6 +30,15 @@ const ControlBox = ({ muteAudio, showVideoFunc, audioVideo }) => {
 
   const { socket } = useContext(SocketIoContext);
 
+  // useState
+  const [sharingLink, setSharingLink] = useState(false);
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    let url = window.location.href;
+    setUrl(url);
+  }, [url]);
+
   // leave function
   const leaveFunction = () => {
     console.log("leave", history);
@@ -50,6 +60,11 @@ const ControlBox = ({ muteAudio, showVideoFunc, audioVideo }) => {
       type: "OPEN_PARTICIPANTS",
       participants: !showParticipants,
     });
+  };
+
+  // sharing link function
+  const sharingLinkFunc = () => {
+    setSharingLink(!sharingLink);
   };
 
   return (
@@ -87,21 +102,26 @@ const ControlBox = ({ muteAudio, showVideoFunc, audioVideo }) => {
       </div>
       {/* middle box */}
       <div className="bottom_button_box__middle_box flex-fill d-flex justify-content-center align-items-center">
-        {/* chat box */}
+        {/* chat btn */}
         <Button
           classList="mr-3 bg_color_white"
           icon={<FaRocketchat size={30} />}
           onClick={changeChat}
         />
+        {/* share btn */}
         <CornerRoundButton
           classList="bg_color_green px-4 py-3 mr-3 color_black"
           content={<FaShareSquare size={30} />}
+          onClick={sharingLinkFunc}
         />
+        {/* share btn end */}
+        {/* participants btn */}
         <Button
           classList="mr-3 bg_color_white"
           icon={<FaUsers size={30} />}
           onClick={changeParticipants}
         />
+        {/* participants btn end */}
       </div>
       {/* right box */}
       <div className="bottom_button_box__right_box d-flex justify-content-center align-items-center p-3">
@@ -112,6 +132,21 @@ const ControlBox = ({ muteAudio, showVideoFunc, audioVideo }) => {
         />
       </div>
       {/* right box end */}
+
+      {/* modal for sharing link */}
+      {sharingLink ? (
+        <CreateRoom
+          show
+          onclick={sharingLinkFunc}
+          btnClick
+          value={url}
+          placeholder="Enter Your Room"
+          btnName="Copy"
+          title="Copy Your URL"
+        />
+      ) : (
+        <CreateRoom />
+      )}
     </div>
   );
 };

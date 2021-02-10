@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./SquareButton.css";
 
 // components
-import CreateRoom from "../../modal/CreateRoom";
+import CreateRoom from "../../modal/CreateModal";
 
 const SquareButton = ({ icon, classList, text, clickable }) => {
   // state
@@ -30,7 +30,13 @@ const SquareButton = ({ icon, classList, text, clickable }) => {
 
       {/* create room meatting */}
       {showCreateRoom ? (
-        <CreateRoom show onclick={showCreateRoomFunc} />
+        <CreateRoom
+          show
+          onclick={showCreateRoomFunc}
+          title="Create Your Own Room"
+          placeholder="Enter Your Room"
+          btnName="Create"
+        />
       ) : (
         <CreateRoom />
       )}
