@@ -224,8 +224,8 @@ const Meeting = ({ location }) => {
   return (
     <div className="meeting__page d-flex flex-column">
       <Navbar />
-      <div className="container-fluid border pt-4 pb-3 mt-5 flex-fill d-flex overflow-hidden">
-        <div className="meeting__box overflow-hidden border border-danger h-100 flex-wrap flex-fill d-flex justify-content-center align-items-center position-relative">
+      <div className="container-fluid pt-4 pb-3 mt-5 flex-fill d-flex overflow-hidden">
+        <div className="meeting__box overflow-hidden h-100 flex-wrap flex-fill d-flex justify-content-center align-items-center position-relative">
           <div className="vedio__box p-1 d-flex justify-content-center">
             <video className="video" ref={userVideo} autoPlay muted />
           </div>
